@@ -9,6 +9,7 @@ function CriminalsController($http) {
 	self.getCriminals = getCriminals;
 	self.addCriminals = addCriminals;
 	self.newCriminal = {};
+	self.deleteCriminals = deleteCriminals;
 
 	console.log("controller");
 
@@ -31,7 +32,15 @@ function addCriminals(){
 			getCriminals();
 		});
 	self.newCriminal = {};
+}
 
+function deleteCriminals(criminal){
+	$http
+		.delete('http://localhost:3000/criminals/' + criminal._id)
+		.then(function(response){
+			var index = self.all.indexOf(criminal);
+			self.all.splice(index, 1);
+		});
 }
 
 
